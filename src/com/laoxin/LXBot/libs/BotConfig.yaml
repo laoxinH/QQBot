@@ -3,7 +3,7 @@ version: "1.0"
 # 机器人服务端配置
 port: 5701            # 端口
 maxConcurrent: 50     # 最大链接数
-staticPath: /D:/src    # 静态文件目录(存放js和用于测试的后台页面)
+staticPath: static    # 静态文件目录(存放js和用于测试的后台页面)
 indexFileName: index.html
 # go-cqhttp配置
 

@@ -35,7 +35,7 @@ public class QLUtils {
     private static ObjectMapper mapper = new ObjectMapper();
 
     static {
-        InputStream is = QLUtils.class.getClassLoader().getResourceAsStream("QLConfig.yaml");
+        InputStream is = QLUtils.class.getClassLoader().getResourceAsStream("com/laoxin/LXBot/libs/QLConfig.yaml");
         ql = yaml.loadAs(is, QLUtils.class);
     }
 

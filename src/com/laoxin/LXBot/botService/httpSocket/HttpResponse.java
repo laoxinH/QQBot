@@ -41,12 +41,16 @@ public class HttpResponse extends Socket {
         }*/
         //TODO： json字符串中包含中文时会解析错误（可通过在json字符串中添加空格解决），原因未知
        // msg += str;
-        setResponseHeard(request.getHttpVersion(), msg.getBytes().length, "json");
         //System.out.println(msg);
         try {
-            out.write(msg.getBytes());
-            out.flush();
-        } catch (IOException e) {
+            setResponseHeard(request.getHttpVersion(), msg.getBytes("utf-8").length, "json");
+            OutputStreamWriter ow = new OutputStreamWriter(out, "utf-8");
+
+            ow.write(msg);
+            ow.flush();
+           /* out.write(msg.getBytes("utf-8"));
+            out.flush();*/
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {

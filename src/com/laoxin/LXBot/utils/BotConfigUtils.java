@@ -3,10 +3,8 @@ package com.laoxin.LXBot.utils;
 
 import com.laoxin.LXBot.test.Test;
 import org.yaml.snakeyaml.Yaml;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+
+import java.io.*;
 import java.util.List;
 
 public class BotConfigUtils {
@@ -24,7 +22,18 @@ public class BotConfigUtils {
     private static Yaml yaml = new Yaml();
     private static BotConfigUtils config;
     static {
-        config = yaml.loadAs(BotConfigUtils.class.getClassLoader().getResourceAsStream("BotConfig.yaml"), BotConfigUtils.class);
+
+        String realPath = yaml.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        realPath = new File(realPath).getParent() + "\\BotConfig.yaml";
+        try {
+            realPath = java.net.URLDecoder.decode(realPath, "utf-8");
+            config = yaml.loadAs(new FileReader(realPath), BotConfigUtils.class);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private BotConfigUtils(){}
@@ -32,14 +41,6 @@ public class BotConfigUtils {
    /* public static CQConfigUtils getConfig(){
         return config;
     }*/
-
-    public static void setConfig(BotConfigUtils config){
-        try {
-            yaml.dump(config ,new OutputStreamWriter(new FileOutputStream("D:\\java study\\project\\QQBot\\src\\com.laoxin.LXBot.test.yaml")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     public int getPort() {
         return port;
@@ -117,13 +118,14 @@ public class BotConfigUtils {
         if (staticPath.startsWith("/")) {
             return staticPath;
         }
-        String realPath = Test.class.getClassLoader().getResource("").getFile();
+        String realPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        realPath = new File(realPath).getParent();
         try {
             realPath = java.net.URLDecoder.decode(realPath, "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return realPath + staticPath;
+        return realPath + "\\"+ staticPath;
     }
 
     public void setStaticPath(String staticPath) {

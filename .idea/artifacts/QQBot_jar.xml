@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="QQBot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/QQBot_jar</output-path>
+    <root id="archive" name="QQBot.jar">
+      <element id="module-output" name="QQBot" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/com/laoxin/LXBot/libs/snakeyaml-1.29.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/com/laoxin/LXBot/libs/jackson-core-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/com/laoxin/LXBot/libs/jackson-databind-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/com/laoxin/LXBot/libs/jackson-annotations-2.12.5.jar" path-in-jar="/" />
+      <element id="library" level="project" name="j2v8_win32_x86_64-4.6.0-sources" />
+    </root>
+  </artifact>
+</component>

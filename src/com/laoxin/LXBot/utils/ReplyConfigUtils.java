@@ -2,8 +2,8 @@ package com.laoxin.LXBot.utils;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 
 public class ReplyConfigUtils {
@@ -14,8 +14,10 @@ public class ReplyConfigUtils {
 
 
     static {
+        String realPath = yaml.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        realPath = new File(realPath).getParent() + "\\ReplyConfig.yaml";
         try {
-            config = yaml.loadAs(ReplyConfigUtils.class.getClassLoader().getResourceAsStream("ReplyConfig.yaml"),ReplyConfigUtils.class);
+            config = yaml.loadAs(new FileReader(realPath),ReplyConfigUtils.class);
             //config =  yaml.loadAs(new FileInputStream("D:\\java study\\project\\QQBot\\src\\ReplyConfig.yaml"),ReplyConfigUtils.class);
         } catch (Exception e) {
             e.printStackTrace();

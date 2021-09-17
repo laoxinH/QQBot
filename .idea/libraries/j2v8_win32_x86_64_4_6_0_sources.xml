@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="j2v8_win32_x86_64-4.6.0-sources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/com/laoxin/LXBot/libs/j2v8_win32_x86_64-4.6.0-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/src/com/laoxin/LXBot/libs/j2v8_win32_x86_64-4.6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

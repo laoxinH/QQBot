@@ -1,0 +1,42 @@
+version: "1.0"
+
+# 机器人服务端配置
+port: 5701            # 端口
+maxConcurrent: 50     # 最大链接数
+staticPath: /D:/src    # 静态文件目录(存放js和用于测试的后台页面)
+indexFileName: index.html
+# go-cqhttp配置
+
+cqgo:
+  host: 127.0.0.1     # go-cqhttp IP
+  port: 5700          # 端口号
+  token:              # go-cqhttp token
+  botQQ: 2404271664   # 机器人QQ号(必填)
+# 管理员QQ
+supper:
+  - 1966843839
+# 监听的群
+groupId:
+  - 544476981
+# 监听私聊QQ
+user:
+  listmod: white  # 名单模式(black:黑名单模式;white:白名单模式)
+  userId:         # QQ列表
+    - 1966843839
+    - 910964831
+
+funcmodeList:
+  - name: 狗东查询
+    describe: 查询🐕东豆子变动
+    help: 发送:"jdcx" 或 "京东查询"
+  - name: JD上号
+    describe: 添加ck并绑定发送者QQ号
+    help: 直接将谷歌浏览器或者alook浏览器获取的ck发送到群里或者私聊机器人即可
+
+suppermodeList:
+  - name: 青龙
+    describe: 青龙的环境变量和定时任务管理
+    help: "qlrun关键字--执行任务\r\nqlstop--停止任务\r\nqldelt关键字--删除任务\r\nqlent关键字--启用任务\r\nqldist关键字--禁用任务"
+  - name: 狗东查询+
+    describe: 超级用户可发送查询所有账号的豆子变动
+    help: 发送:"jdcx编号"(编号按照青龙环境变量顺序查询)

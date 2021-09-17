@@ -1,0 +1,11 @@
+!!utils.CQConfigUtils
+cqgo: {botQQ: 2404271664, host: 127.0.0.1, port: '5700', token: null}
+funcmodeList:
+- {describe: 功能说明, help: 帮助说明, name: 名称}
+- {describe: giag, help: dcada, name: 测试}
+groupId: [544476981]
+supper: [910964831, 1966843839]
+user:
+  listmod: white
+  userId: [1966843839, 910964831]
+version: '1.0'

@@ -1,0 +1,30 @@
+# keyword 触发关键字(多关键字用 | 分割)
+# mod表示关键词触发模式:1--完全匹配模式(当消息与关键词一字不差时触发), 2--模糊匹配模式(当消息中包含相应关键词触发)
+# type 回复类型: 纯文字填写text, 图片api和文字api填写url-img,url-text,图片和文字混合填写mix
+# url 图片或者文字api链接,当type类型为url和mix时生效
+# reply 回复纯文本消息的类容,当type类型为text和mix时生效
+version: 1.0
+replyList:
+  - keyword: 我是你爸爸
+    mod: 2
+    type: text
+    url:
+    reply: 老子是你爸爸
+
+  - keyword: 舔狗|日记
+    mod: 2
+    type: url-text
+    url: https://api.dzzui.com/api/tiangou?format=text
+    reply:
+
+  - keyword: 小姐姐
+    mod: 2
+    type: url-img
+    url: http://api.btstu.cn/sjbz
+    reply:
+
+  - keyword: 测试
+    mod: 2
+    type: mix
+    url: http://api.btstu.cn/sjbz
+    reply: 我是消息

@@ -27,7 +27,8 @@ public class BotConfigUtils {
         realPath = new File(realPath).getParent() + "\\BotConfig.yaml";
         try {
             realPath = java.net.URLDecoder.decode(realPath, "utf-8");
-            config = yaml.loadAs(new FileReader(realPath), BotConfigUtils.class);
+            config = yaml.loadAs(new InputStreamReader(new FileInputStream(realPath),"utf-8"),BotConfigUtils.class);
+
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -2,8 +2,7 @@ package com.laoxin.LXBot.utils;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.List;
 
 public class ReplyConfigUtils {
@@ -17,7 +16,9 @@ public class ReplyConfigUtils {
         String realPath = yaml.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
         realPath = new File(realPath).getParent() + "\\ReplyConfig.yaml";
         try {
-            config = yaml.loadAs(new FileReader(realPath),ReplyConfigUtils.class);
+            realPath = java.net.URLDecoder.decode(realPath, "utf-8");
+
+            config = yaml.loadAs(new InputStreamReader(new FileInputStream(realPath),"utf-8"),ReplyConfigUtils.class);
             //config =  yaml.loadAs(new FileInputStream("D:\\java study\\project\\QQBot\\src\\ReplyConfig.yaml"),ReplyConfigUtils.class);
         } catch (Exception e) {
             e.printStackTrace();

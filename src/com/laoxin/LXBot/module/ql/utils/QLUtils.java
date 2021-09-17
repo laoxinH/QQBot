@@ -8,16 +8,15 @@ import com.laoxin.LXBot.module.ql.bean.QLCron;
 import com.laoxin.LXBot.module.ql.bean.QLEnvs;
 import com.laoxin.LXBot.utils.HttpOpts;
 import com.laoxin.LXBot.utils.HttpUtils;
+import com.laoxin.LXBot.utils.ReplyConfigUtils;
 import com.sun.istack.internal.NotNull;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.io.InputStream;
 import java.util.Map;
 
 public class QLUtils {
@@ -35,8 +34,18 @@ public class QLUtils {
     private static ObjectMapper mapper = new ObjectMapper();
 
     static {
-        InputStream is = QLUtils.class.getClassLoader().getResourceAsStream("com/laoxin/LXBot/libs/QLConfig.yaml");
-        ql = yaml.loadAs(is, QLUtils.class);
+        String realPath = yaml.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+        realPath = new File(realPath).getParent() + "\\QLConfig.yaml";
+
+        try {
+            realPath = java.net.URLDecoder.decode(realPath, "utf-8");
+            ql = yaml.loadAs(new InputStreamReader(new FileInputStream(realPath),"utf-8"), QLUtils.class);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public static QLUtils getQl() {
@@ -349,6 +358,7 @@ public class QLUtils {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
         token = node.get("data").get("token").asText();
     }
 

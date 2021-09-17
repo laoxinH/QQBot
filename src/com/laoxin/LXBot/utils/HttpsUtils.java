@@ -33,7 +33,8 @@ public class HttpsUtils {
         StringBuffer buffer = new StringBuffer();
         HttpsURLConnection conn = null;
         HttpRespBean httpResp = null;
-        PrintWriter out = null;
+        OutputStreamWriter out = null;
+        BufferedReader br = null;
         try {
             URL url = new URL(null,opts.getRequestURL(),new Handler());
 
@@ -70,18 +71,20 @@ public class HttpsUtils {
             Map<String, Object> requestParams = opts.getRequestParams();
             String requestData = opts.getRequestData();
             if (requestParams != null) {
-                out = new PrintWriter(conn.getOutputStream());
+                out = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
+
+
                 // 发送请求参数
                 // 解决服务端接受数据问题
-                out.println(objectMapper.writeValueAsString(requestParams));
+                out.write(objectMapper.writeValueAsString(requestParams));
                 // flush输出流的缓冲
                 out.flush();
-                out.close();
+
             } else if (requestData != null){
-                out = new PrintWriter(conn.getOutputStream());
-                out.println(requestData);
+                out = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
+                out.write(requestData);
                 out.flush();
-                out.close();
+
             }
             if (conn != null) {
                 httpResp = new HttpRespBean();
@@ -98,13 +101,13 @@ public class HttpsUtils {
 
                 //System.out.println(inputStream);
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "utf8"));
+                br = new BufferedReader(new InputStreamReader(inputStream, "utf8"));
                 String line = null;
                 while ((line = br.readLine()) != null) {
                     buffer.append(line);
                     buffer.append("\r\n");
                 }
-                br.close();
+
             }
             conn.disconnect();
             httpResp.setData(buffer.toString());
@@ -112,6 +115,22 @@ public class HttpsUtils {
         } catch (Exception e) {
             System.out.println("HTTP 请求错误: ");
             e.printStackTrace();
+        }finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (br != null){
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
         return httpResp;
     }
